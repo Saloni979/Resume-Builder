@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { X } from "react-feather";
 
-//import { X } from "react-feather";
-
 import InputControl from "../InputControl/InputControl";
 
 import styles from "./Editor.module.css";
@@ -19,7 +17,7 @@ function Editor(props) {
   );
   const [activeDetailIndex, setActiveDetailIndex] = useState(0);
   const [sectionTitle, setSectionTitle] = useState(
-    sections[Object.keys(sections)[0]]
+   sections[Object.keys(sections)[0]]
   );
   const [values, setValues] = useState({
     name: activeInformation?.detail?.name || "",
@@ -481,49 +479,51 @@ function Editor(props) {
         }));
         break;
       }
+        default:{
+          return null;
+      }
     }
-};
+    };
 
-const handleAddNew = () => {
-    const details = activeInformation?.details;
-    if (!details) return;
-    const lastDetail = details.slice(-1)[0];
-    if (!Object.keys(lastDetail).length) return;
-    details?.push({});
+    const handleAddNew = () => {
+      const details = activeInformation?.details;
+      if (!details) return;
+      const lastDetail = details.slice(-1)[0];
+      if (!Object.keys(lastDetail).length) return;
+      details?.push({});
+  
+      props.setInformation((prev) => ({
+        ...prev,
+        [sections[activeSectionKey]]: {
+          ...information[sections[activeSectionKey]],
+          details: details,
+        },
+      }));
+      setActiveDetailIndex(details?.length - 1);
+    };
 
-    props.setInformation((prev) => ({
-      ...prev,
-      [sections[activeSectionKey]]: {
-        ...information[sections[activeSectionKey]],
-        details: details,
-      },
-    }));
-    setActiveDetailIndex(details?.length - 1);
-  };
-
-  const handleDeleteDetail = (index) => {
-    const details = activeInformation?.details
-      ? [...activeInformation?.details]
-      : "";
-    if (!details) return;
-    details.splice(index, 1);
-    props.setInformation((prev) => ({
-      ...prev,
-      [sections[activeSectionKey]]: {
-        ...information[sections[activeSectionKey]],
-        details: details,
-      },
-    }));
-
-    setActiveDetailIndex((prev) => (prev === index ? 0 : prev - 1));
-  };
-
+    const handleDeleteDetail = (index) => {
+      const details = activeInformation?.details
+        ? [...activeInformation?.details]
+        : "";
+      if (!details) return;
+      details.splice(index, 1);
+      props.setInformation((prev) => ({
+        ...prev,
+        [sections[activeSectionKey]]: {
+          ...information[sections[activeSectionKey]],
+          details: details,
+        },
+      }));
+  
+      setActiveDetailIndex((prev) => (prev === index ? 0 : prev - 1));
+    };
 
   useEffect(() => {
     const activeInfo=information[sections[activeSectionKey]];
     setActiveInformation(activeInfo);
     setSectionTitle(sections[activeSectionKey])
-     // eslint-disable-next-line
+     
      setActiveDetailIndex(0);
      setValues({
         name: activeInfo?.detail?.name || "",
@@ -570,10 +570,9 @@ const handleAddNew = () => {
   }, [activeSectionKey]);
 
   useEffect(() => {
-    // eslint-disable-next-line
     setActiveInformation(information[sections[activeSectionKey]]);
     // eslint-disable-next-line
-  }, [information]);
+  },[information]);
 
   useEffect(() => {
     const details = activeInformation?.details;
@@ -594,7 +593,6 @@ const handleAddNew = () => {
       linkedin: activeInfo.details[activeDetailIndex]?.linkedin || "",
       github: activeInfo.details[activeDetailIndex]?.github || "",
       college: activeInfo.details[activeDetailIndex]?.college || "",
-      // eslint-disable-next-line
     });
     // eslint-disable-next-line
   }, [activeDetailIndex]);
@@ -628,15 +626,15 @@ const handleAddNew = () => {
             ? activeInformation?.details?.map((item, index) => (
                 <div
                 className={`${styles.chip} ${
-                  activeDetailIndex === index ? styles.active : ""
-                }`}
-                key={item.title + index}
-                onClick={() => setActiveDetailIndex(index)}
+                activeDetailIndex === index ? styles.active : ""
+            }`}
+                 key={item.title + index}
+                 onClick={() => setActiveDetailIndex(index)}          
                 >
                   <p>
                     {sections[activeSectionKey]} {index + 1}
                   </p>
-                  <X
+                  <X  
                   onClick={(event) => {
                     event.stopPropagation();
                     handleDeleteDetail(index);
@@ -645,16 +643,14 @@ const handleAddNew = () => {
                 </div>
               ))
             : ""}
-             {activeInformation?.details &&
+          {activeInformation?.details &&
           activeInformation?.details?.length > 0 ? (
-            <div className={styles.new} onClick={handleAddNew}>
-              +New
-            </div>
-          ) : (
-            ""
-          )}
-        
+        <div className={styles.new} onClick={handleAddNew}>+New
         </div>
+         ) : (
+          ""
+        )}
+     </div>
 
         {generateBody()}
 
@@ -662,6 +658,6 @@ const handleAddNew = () => {
       </div>
     </div>
   );
-}
+ }
 
 export default Editor;
