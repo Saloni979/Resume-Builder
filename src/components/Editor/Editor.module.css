@@ -1,4 +1,4 @@
-/*.container {
+.container {
     min-width: 550px;
     min-height: 450px;
     max-width: 750px;
@@ -128,4 +128,4 @@
   
   .body button:active {
     transform: translateY(2px);
-  }*/
+  }
