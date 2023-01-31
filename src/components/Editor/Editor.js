@@ -1,6 +1,6 @@
-/*import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { X } from "react-feather";
+//import { X } from "react-feather";
 
 import InputControl from "../InputControl/InputControl";
 
@@ -415,4 +415,4 @@ function Editor(props) {
   );
 }
 
-export default Editor;*/
+export default Editor;

@@ -1,4 +1,4 @@
-/*import React, { useState } from "react";
+import React, { useState } from "react";
 
 import styles from './Body.module.css'
 
@@ -77,9 +77,10 @@ import {ArrowDown} from 'react-feather'
             </button>
         </div>
         <div className={styles.main}>
-            <Editor sections ={sections} information={resumeInformation}/>
+            <Editor sections ={sections} information={resumeInformation}
+            setInformation={setResumeInformation}/>
         </div>
     </div>
  );
 }
- export default Body;*/
+ export default Body;
