@@ -69,7 +69,7 @@ function Body() {
               key={item}
               style={{ backgroundColor: item }}
               className={`${styles.color} ${
-                activeCo+lor === item ? styles.active : ""
+                activeColor === item ? styles.active : ""
               }`}
               onClick={() => setActiveColor(item)}
             />
