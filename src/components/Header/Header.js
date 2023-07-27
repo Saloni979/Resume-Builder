@@ -9,9 +9,9 @@ function Header() {
     <div className={styles.container}>
       <div className={styles.left}>
         <p className={styles.heading}>
-          A <span>Resume</span> that stands out!
+        The <span>Ultimate Resume Builder.</span> 
         </p>
-        <p className={styles.heading}>
+        <p className={styles.heading} style={{fontSize:43}}>
           Make your own resume. <span>It's free</span>
         </p>
       </div>
